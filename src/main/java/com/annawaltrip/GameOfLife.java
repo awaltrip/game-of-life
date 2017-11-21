@@ -3,11 +3,10 @@ package com.annawaltrip;
 public class GameOfLife {
 	
 	public static int[][] life(int[][] field) {
-		int[][] nextGen = new int[3][3];
+		int[][] nextGen = new int[field.length][field[0].length];
 		
 		for (int row = 0; row < field.length; row++) {
 			for (int cell = 0; cell < field[row].length; cell++) {
-				
 				int allNeighbors = checkAllNeighbors(row, cell, field);
 				nextGen[row][cell] = determineCellFate(allNeighbors, field[row][cell]);
 			}

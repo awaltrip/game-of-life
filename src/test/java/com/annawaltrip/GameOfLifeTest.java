@@ -121,4 +121,18 @@ public class GameOfLifeTest {
 		Assert.assertArrayEquals(expected, GameOfLife.life(field));
 	}
 	
+	@Test
+	public void largerGridWorksWithBlockPattern() {
+		int[][] field = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 1, 1, 0, 0, 0 },
+				{ 0, 0, 0, 1, 1, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
+		
+		int[][] expected = field;
+		
+		Assert.assertArrayEquals(expected, GameOfLife.life(field));
+	}
+	
 }
