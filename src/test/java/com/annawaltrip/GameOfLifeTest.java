@@ -107,4 +107,5 @@ public class GameOfLifeTest {
 		
 		Assert.assertArrayEquals(expected, GameOfLife.life(field));
 	}
+	
 }
