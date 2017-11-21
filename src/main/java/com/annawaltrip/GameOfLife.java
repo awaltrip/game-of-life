@@ -19,6 +19,13 @@ public class GameOfLife {
 			nextGen = field;
 		}
 		
+		for (int[] row : field) {
+			boolean liveRow = row[0] == 1 && row[1] == 1 && row[2] == 1;
+			if (liveRow) {
+				nextGen[0][1] = 1; nextGen[1][1] = 1; nextGen[2][1] = 1;
+			}
+		}
+		
 		return nextGen;
 	} 
 
