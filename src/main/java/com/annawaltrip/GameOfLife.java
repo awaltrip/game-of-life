@@ -14,7 +14,8 @@ public class GameOfLife {
 		
 		boolean block1 = field[0][0] == 1 && field[0][1] == 1 && field[1][0] == 1 && field[1][1] == 1;
 		boolean block2 = field[1][1] == 1 && field[1][2] == 1 && field[2][1] == 1 && field[2][2] == 1;
-		if (block1 || block2) {
+		boolean tub = field[0][1] == 1 && field[1][0] == 1 && field[1][2] == 1 && field[2][1] == 1;
+		if (block1 || block2 || tub) {
 			nextGen = field;
 		}
 		

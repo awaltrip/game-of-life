@@ -83,4 +83,15 @@ public class GameOfLifeTest {
 		Assert.assertArrayEquals(expected1, GameOfLife.life(field1));
 		Assert.assertArrayEquals(expected2, GameOfLife.life(field2));
 	}
+	
+	@Test
+	public void tubPatternRemainsTheSame() {
+		int[][] field = { { 0, 1, 0 },
+				{ 1, 0, 1 },
+				{ 0, 1, 0 } };
+		
+		int[][] expected = field;
+		
+		Assert.assertArrayEquals(expected, GameOfLife.life(field));
+	}
 }
