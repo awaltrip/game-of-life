@@ -20,12 +20,31 @@ public class GameOfLife {
 		}
 		
 		for (int row = 0; row < field.length; row++) {
-			boolean liveRow = field[row][0] == 1 && field[row][1] == 1 && field[row][2] == 1;
-			if (liveRow) {
-				nextGen[0][row] = 1; nextGen[1][row] = 1; nextGen[2][row] = 1;
+			for (int cell = 0; cell < field[row].length; cell++) {
+				int above = 0, sameRow = 0, below = 0, allNeighbors = 0;
+				if (cell == 0) { //left
+					above = (row == 0) ? 0 : field[row-1][cell] + field[row-1][cell+1];
+					sameRow = field[row][cell+1];
+					below = (row == field.length-1) ? 0 : field[row+1][cell] + field[row+1][cell+1];
+				} else if (cell == field[row].length-1) { //right
+					above = (row == 0) ? 0 : field[row-1][cell-1] + field[row-1][cell];
+					sameRow = field[row][cell-1];
+					below = (row == field.length-1) ? 0 : field[row+1][cell] + field[row+1][cell-1];
+				} else {
+					above = (row == 0) ? 0 : field[row-1][cell-1] + field[row-1][cell] + field[row-1][cell+1];
+					sameRow = field[row][cell-1] + field[row][cell+1];
+					below = (row == field.length-1) ? 0 : field[row+1][cell] + field[row+1][cell-1] + field[row+1][cell+1];
+				}
+				allNeighbors = above + sameRow + below;
+				if (allNeighbors < 2 || allNeighbors > 3) {
+					nextGen[row][cell] = 0;
+				} else if (allNeighbors == 3) {
+					nextGen[row][cell] = 1;
+				} else {
+					nextGen[row][cell] = field[row][cell];
+				}
 			}
 		}
-		
 		return nextGen;
 	} 
 

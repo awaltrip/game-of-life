@@ -108,4 +108,17 @@ public class GameOfLifeTest {
 		Assert.assertArrayEquals(expected, GameOfLife.life(field));
 	}
 	
+	@Test
+	public void verticalLineOfThreeCellsRotates() {
+		int[][] field = { { 0, 1, 0 },
+				{ 0, 1, 0 },
+				{ 0, 1, 0 } };
+		
+		int[][] expected = { { 0, 0, 0 },
+				{ 1, 1, 1 },
+				{ 0, 0, 0 } };
+		
+		Assert.assertArrayEquals(expected, GameOfLife.life(field));
+	}
+	
 }
