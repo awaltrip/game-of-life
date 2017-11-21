@@ -157,4 +157,47 @@ public class GameOfLifeTest {
 		Assert.assertArrayEquals(gen2, GameOfLife.life(gen1));
 	}
 	
+	@Test
+	public void gliderGlides() {
+		int[][] field = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 1, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 1, 0, 0, 0 },
+				{ 0, 0, 1, 1, 1, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
+		
+		int[][] gen1 = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 1, 0, 1, 0, 0, 0 },
+				{ 0, 0, 0, 1, 1, 0, 0, 0 },
+				{ 0, 0, 0, 1, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
+		
+		int[][] gen2 = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 1, 0, 0, 0 },
+				{ 0, 0, 1, 0, 1, 0, 0, 0 },
+				{ 0, 0, 0, 1, 1, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
+		
+		int[][] gen3 = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 1, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 1, 1, 0, 0 },
+				{ 0, 0, 0, 1, 1, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
+		
+		int[][] gen4 = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 1, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 1, 0, 0 },
+				{ 0, 0, 0, 1, 1, 1, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
+		
+		Assert.assertArrayEquals(gen1, GameOfLife.life(field));
+		Assert.assertArrayEquals(gen2, GameOfLife.life(gen1));
+		Assert.assertArrayEquals(gen3, GameOfLife.life(gen2));
+		Assert.assertArrayEquals(gen4, GameOfLife.life(gen3));
+	}
+	
 }
