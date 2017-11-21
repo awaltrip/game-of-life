@@ -135,4 +135,26 @@ public class GameOfLifeTest {
 		Assert.assertArrayEquals(expected, GameOfLife.life(field));
 	}
 	
+	@Test
+	public void beaconOscillatesPeriod2() {
+		int[][] field = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 1, 1, 0, 0, 0, 0 },
+				{ 0, 0, 1, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 1, 0, 0 },
+				{ 0, 0, 0, 0, 1, 1, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
+		
+		int[][] gen1 = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 1, 1, 0, 0, 0, 0 },
+				{ 0, 0, 1, 1, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 1, 1, 0, 0 },
+				{ 0, 0, 0, 0, 1, 1, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 },};
+		
+		int[][] gen2 = field;
+		
+		Assert.assertArrayEquals(gen1, GameOfLife.life(field));
+		Assert.assertArrayEquals(gen2, GameOfLife.life(gen1));
+	}
+	
 }

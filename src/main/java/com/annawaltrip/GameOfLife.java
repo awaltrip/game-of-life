@@ -17,11 +17,11 @@ public class GameOfLife {
 	
 	private static int checkAllNeighbors(int row, int cell, int[][] field) {
 		int above = 0, sameRow = 0, below = 0;
-		if (cell == 0) { //left
+		if (cell == 0) { //left column
 			above = (row == 0) ? 0 : field[row-1][cell] + field[row-1][cell+1];
 			sameRow = field[row][cell+1];
 			below = (row == field.length-1) ? 0 : field[row+1][cell] + field[row+1][cell+1];
-		} else if (cell == field[row].length-1) { //right
+		} else if (cell == field[row].length-1) { //right column
 			above = (row == 0) ? 0 : field[row-1][cell-1] + field[row-1][cell];
 			sameRow = field[row][cell-1];
 			below = (row == field.length-1) ? 0 : field[row+1][cell] + field[row+1][cell-1];
