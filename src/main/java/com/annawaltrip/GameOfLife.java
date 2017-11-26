@@ -2,18 +2,36 @@ package com.annawaltrip;
 
 public class GameOfLife {
 	
+	public static void printNextGenFromInput(int[][] field) {
+		System.out.println("\nYou have created this field:\n");
+		for (int[] row : field) {
+			for (int cell : row) {
+				System.out.print(cell);
+			}
+			System.out.print("\n");
+		}
+		int[][] nextGen = life(field);
+		System.out.println("\nThe Next Generation:\n");
+		for (int[] row : nextGen) {
+			for (int cell : row) {
+				System.out.print(cell);
+			}
+			System.out.print("\n");
+		}
+	}
+	
 	public static int[][] life(int[][] field) {
 		int[][] nextGen = new int[field.length][field[0].length];
 		for (int row = 0; row < field.length; row++) {
 			for (int cell = 0; cell < field[row].length; cell++) {
-				int liveNeighbors = checkAllNeighbors(row, cell, field);
+				int liveNeighbors = countNeighbors(field, row, cell);
 				nextGen[row][cell] = determineCellFate(liveNeighbors, field[row][cell]);
 			}
 		}
 		return nextGen;
-	} 
+	}
 	
-	private static int checkAllNeighbors(int row, int cell, int[][] field) {
+	private static int countNeighbors(int[][] field, int row, int cell) {
 		int above = 0, sameRow = 0, below = 0;
 		if (cell == 0) { 	//left column
 			above = (row == 0) ? 0 : field[row-1][cell] + field[row-1][cell+1];

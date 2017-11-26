@@ -1,9 +1,23 @@
 package com.annawaltrip;
 
 import org.junit.Test;
-import org.junit.Assert;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Scanner;
+
+import static org.junit.Assert.*;
+import org.junit.Before;
 
 public class GameOfLifeTest {
+	
+	private ByteArrayOutputStream output;
+	
+	@Before
+	public void setup() {
+		output = new ByteArrayOutputStream();
+		System.setOut(new PrintStream(output));
+	}
 	
 	@Test
 	public void oneCellAloneDies() {
@@ -15,7 +29,7 @@ public class GameOfLifeTest {
 				{ 0, 0, 0 },
 				{ 0, 0, 0 } };
 		
-		Assert.assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.life(field));
 	}
 	
 	@Test
@@ -32,8 +46,8 @@ public class GameOfLifeTest {
 				{ 0, 0, 0 },
 				{ 0, 0, 0 } };
 		
-		Assert.assertArrayEquals(expected, GameOfLife.life(field1));
-		Assert.assertArrayEquals(expected, GameOfLife.life(field2));
+		assertArrayEquals(expected, GameOfLife.life(field1));
+		assertArrayEquals(expected, GameOfLife.life(field2));
 	}
 	
 	@Test
@@ -46,7 +60,7 @@ public class GameOfLifeTest {
 				{ 0, 0, 0 },
 				{ 0, 0, 0 } };
 		
-		Assert.assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.life(field));
 	}
 	
 	@Test
@@ -63,8 +77,8 @@ public class GameOfLifeTest {
 				{ 0, 1, 0 },
 				{ 0, 0, 0 } };
 		
-		Assert.assertArrayEquals(expected, GameOfLife.life(field1));
-		Assert.assertArrayEquals(expected, GameOfLife.life(field2));
+		assertArrayEquals(expected, GameOfLife.life(field1));
+		assertArrayEquals(expected, GameOfLife.life(field2));
 	}
 	
 	@Test
@@ -80,8 +94,8 @@ public class GameOfLifeTest {
 		int[][] expected1 = field1;
 		int[][] expected2 = field2;
 		
-		Assert.assertArrayEquals(expected1, GameOfLife.life(field1));
-		Assert.assertArrayEquals(expected2, GameOfLife.life(field2));
+		assertArrayEquals(expected1, GameOfLife.life(field1));
+		assertArrayEquals(expected2, GameOfLife.life(field2));
 	}
 	
 	@Test
@@ -92,7 +106,7 @@ public class GameOfLifeTest {
 		
 		int[][] expected = field;
 		
-		Assert.assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.life(field));
 	}
 	
 	@Test
@@ -105,7 +119,7 @@ public class GameOfLifeTest {
 				{ 0, 1, 0 },
 				{ 0, 1, 0 } };
 		
-		Assert.assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.life(field));
 	}
 	
 	@Test
@@ -118,7 +132,7 @@ public class GameOfLifeTest {
 				{ 1, 1, 1 },
 				{ 0, 0, 0 } };
 		
-		Assert.assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.life(field));
 	}
 	
 	@Test
@@ -132,7 +146,7 @@ public class GameOfLifeTest {
 		
 		int[][] expected = field;
 		
-		Assert.assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.life(field));
 	}
 	
 	@Test
@@ -153,8 +167,8 @@ public class GameOfLifeTest {
 		
 		int[][] gen2 = field;
 		
-		Assert.assertArrayEquals(gen1, GameOfLife.life(field));
-		Assert.assertArrayEquals(gen2, GameOfLife.life(gen1));
+		assertArrayEquals(gen1, GameOfLife.life(field));
+		assertArrayEquals(gen2, GameOfLife.life(gen1));
 	}
 	
 	@Test
@@ -194,10 +208,59 @@ public class GameOfLifeTest {
 				{ 0, 0, 0, 1, 1, 1, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
 		
-		Assert.assertArrayEquals(gen1, GameOfLife.life(field));
-		Assert.assertArrayEquals(gen2, GameOfLife.life(gen1));
-		Assert.assertArrayEquals(gen3, GameOfLife.life(gen2));
-		Assert.assertArrayEquals(gen4, GameOfLife.life(gen3));
+		assertArrayEquals(gen1, GameOfLife.life(field));
+		assertArrayEquals(gen2, GameOfLife.life(gen1));
+		assertArrayEquals(gen3, GameOfLife.life(gen2));
+		assertArrayEquals(gen4, GameOfLife.life(gen3));
+	}
+	
+	@Test
+	public void printsNextGenFromInputBlockPattern() {
+		int[][] field = { { 1, 1, 0 },
+				{ 1, 1, 0 },
+				{ 0, 0, 0 } };
+		
+		String expected = "\nYou have created this field:\n\n" +
+							"110\n" +
+							"110\n" +
+							"000\n\n" +
+							"The Next Generation:\n\n" +
+							"110\n" +
+							"110\n" +
+							"000\n";
+		
+		GameOfLife.printNextGenFromInput(field);
+		
+		assertEquals(expected, output.toString());
+	}
+	
+	@Test
+	public void printsNextGenFromInputBeacon() {
+		int[][] field = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 1, 1, 0, 0, 0, 0 },
+				{ 0, 0, 1, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 0, 0, 1, 0, 0 },
+				{ 0, 0, 0, 0, 1, 1, 0, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
+		
+		String expected = "\nYou have created this field:\n\n" +
+							"00000000\n" +
+							"00110000\n" +
+							"00100000\n" +
+							"00000100\n" +
+							"00001100\n" +
+							"00000000\n\n" +
+							"The Next Generation:\n\n" +
+							"00000000\n" +
+							"00110000\n" +
+							"00110000\n" +
+							"00001100\n" +
+							"00001100\n" +
+							"00000000\n";
+		
+		GameOfLife.printNextGenFromInput(field);
+		
+		assertEquals(expected, output.toString());
 	}
 	
 }
