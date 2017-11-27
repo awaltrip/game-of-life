@@ -42,7 +42,7 @@ I developed the "play" method by writing further tests for commonly-known, simpl
 
 Next, I added a method to print the initial grid and its next generation to the console, utilizing the "play" method.
 
-Finally, I added a "main" method to accept a user-input grid, and perform the printing method. The user specifies how many rows and columns they would like the grid to be, then inputs each row. The program then displays the grid from the user-input rows, calculates the next generation, and displays that next generation.
+Finally, I added a "main" method to accept a user-input grid, and perform the printing method. The user specifies how many rows and columns they would like the grid to be, then inputs each row. The program then displays the grid from the user-input rows, calculates the next generation, and displays that next generation. The method can handle any bad input from the user without crashing the program.
 
 I added a `GameOfLifeCLI` class and refactored the code so that this class handles the main method and printing method - i.e. any methods that deal with the console.
 
