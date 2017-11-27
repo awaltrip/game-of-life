@@ -1,10 +1,13 @@
 # Conway's Game of Life
 
-This program calculates the next generation of Conway’s Game of Life given any initial state.
+This command-line program calculates and displays the next generation of Conway’s Game of Life given any initial state.
+The language I chose for this program is Java. Testing was done using JUnit tests and manual tests (i.e. running the program).
+
+### About the Game of Life
 
 The playing field for the game of life consists of a two-dimensional grid of cells. Each cell is identified as either alive or dead.
 
-To determine the next generation of the grid, follow these rules:
+To determine the next generation of the grid, the program follows these rules:
 
 1. Any live cell with fewer than two live neighbors dies, as if caused by under-population.
 2. Any live cell with more than three live neighbors dies, as if by overcrowding.
