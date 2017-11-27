@@ -23,10 +23,13 @@ From Eclipse, follow these prompts:
 2. In the Maven folder, choose Existing Maven Projects
 3. Browse to the game-of-life folder (extracted from the .zip file) and click Open
 4. Click Finish
-5. In the Project Explorer, navigate to src/main/java/com/annawaltrip/GameOfLifeCLI.java
-6. Right-click on this file and select Run As > Java Application. 
 
-To test this software:
+To run the software:
+
+1. In the Project Explorer, navigate to src/main/java/com/annawaltrip/GameOfLifeCLI.java
+2. Right-click on this file and select Run As > Java Application. 
+
+To test the software:
 
 1. In the Eclipse Project Explorer, navigate to src/test/java/com/annawaltrip/GameOfLifeTest.java
 2. Right-click on this file and select Run As > JUnit Test.
