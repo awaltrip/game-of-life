@@ -230,7 +230,7 @@ public class GameOfLifeTest {
 							"110\n" +
 							"110\n" +
 							"000\n\n" +
-							"The Next Generation:\n\n" +
+							"The next generation:\n\n" +
 							"110\n" +
 							"110\n" +
 							"000\n";
@@ -256,7 +256,7 @@ public class GameOfLifeTest {
 							"00000100\n" +
 							"00001100\n" +
 							"00000000\n\n" +
-							"The Next Generation:\n\n" +
+							"The next generation:\n\n" +
 							"00000000\n" +
 							"00110000\n" +
 							"00110000\n" +
@@ -285,7 +285,7 @@ public class GameOfLifeTest {
 							"00000000\n" +
 							"00011000\n" +
 							"00011000\n\n" +
-							"The Next Generation:\n\n" +
+							"The next generation:\n\n" +
 							"01000000\n" +
 							"01000111\n" +
 							"01000000\n" +

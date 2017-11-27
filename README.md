@@ -37,7 +37,7 @@ To test the software:
 1. In the Eclipse Project Explorer, navigate to src/test/java/com/annawaltrip/GameOfLifeTest.java
 2. Right-click on this file and select Run As > JUnit Test.
 
-### My thought process
+### Program details / My thought process
 
 After researching the Game of Life, I first wrote a JUnit test for the simplest "grid" I could think of: a grid containing only one cell, which should die of loneliness. For the grid, I decided to use a 2-D array of integers with 3 rows and 3 columns. I created a `GameOfLife` class, and created one method called "life" (later renamed to "play") which would calculate the next generation of the grid. 
 
@@ -51,7 +51,7 @@ I added a `GameOfLifeCLI` class and refactored the code so that this class handl
 
 ### What I could have done differently
 
-The data structure I chose for the grid was a 2-D integer array (`int[][]`). I realized that I could have also used a 1-D `String[]` array. This may have made it simpler to handle user input and print the grids to the console.
+The data structure I chose for the grid was a 2-D integer array (`int[][]`). I realized that I could have also used a 1-D `String[]` array. This may have made it simpler to handle user input and print the grids to the console, though it could have made calculating the next generation a bit more complicated.
 
 There were some other class structures I could imagine, such as having a `Row` class and/or a `Cell` class.
 
