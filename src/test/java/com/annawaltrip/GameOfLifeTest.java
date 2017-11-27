@@ -6,6 +6,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.Assert.*;
+
+import org.junit.After;
 import org.junit.Before;
 
 public class GameOfLifeTest {
@@ -18,9 +20,14 @@ public class GameOfLifeTest {
 		System.setOut(new PrintStream(output));
 	}
 	
+	@After
+	public void cleanUp() {
+	    System.setOut(null);
+	}
+	
 	@Test
 	public void oneCellAloneDies() {
-		int[][] field = { { 0, 0, 0 },
+		int[][] grid = { { 0, 0, 0 },
 				{ 0, 1, 0 },
 				{ 0, 0, 0 } };
 		
@@ -28,16 +35,16 @@ public class GameOfLifeTest {
 				{ 0, 0, 0 },
 				{ 0, 0, 0 } };
 		
-		assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.play(grid));
 	}
 	
 	@Test
 	public void twoCellsAloneDie() {
-		int[][] field1 = { { 0, 0, 0 },
+		int[][] grid1 = { { 0, 0, 0 },
 				{ 1, 1, 0 },
 				{ 0, 0, 0 } };
 		
-		int[][] field2 = { { 1, 0, 0 },
+		int[][] grid2 = { { 1, 0, 0 },
 				{ 0, 1, 0 },
 				{ 0, 0, 0 } };
 		
@@ -45,13 +52,13 @@ public class GameOfLifeTest {
 				{ 0, 0, 0 },
 				{ 0, 0, 0 } };
 		
-		assertArrayEquals(expected, GameOfLife.life(field1));
-		assertArrayEquals(expected, GameOfLife.life(field2));
+		assertArrayEquals(expected, GameOfLife.play(grid1));
+		assertArrayEquals(expected, GameOfLife.play(grid2));
 	}
 	
 	@Test
 	public void fourLoneCellsDie() {
-		int[][] field = { { 1, 0, 1 },
+		int[][] grid = { { 1, 0, 1 },
 				{ 0, 0, 0 },
 				{ 1, 0, 1 } };
 		
@@ -59,16 +66,16 @@ public class GameOfLifeTest {
 				{ 0, 0, 0 },
 				{ 0, 0, 0 } };
 		
-		assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.play(grid));
 	}
 	
 	@Test
 	public void threeDiagonalCellsBecomeOne() {
-		int[][] field1 = { { 1, 0, 0 },
+		int[][] grid1 = { { 1, 0, 0 },
 				{ 0, 1, 0 },
 				{ 0, 0, 1 } };
 		
-		int[][] field2 = { { 0, 0, 1 },
+		int[][] grid2 = { { 0, 0, 1 },
 				{ 0, 1, 0 },
 				{ 1, 0, 0 } };
 		
@@ -76,41 +83,41 @@ public class GameOfLifeTest {
 				{ 0, 1, 0 },
 				{ 0, 0, 0 } };
 		
-		assertArrayEquals(expected, GameOfLife.life(field1));
-		assertArrayEquals(expected, GameOfLife.life(field2));
+		assertArrayEquals(expected, GameOfLife.play(grid1));
+		assertArrayEquals(expected, GameOfLife.play(grid2));
 	}
 	
 	@Test
 	public void blockPatternRemainsTheSame() {
-		int[][] field1 = { { 1, 1, 0 },
+		int[][] grid1 = { { 1, 1, 0 },
 				{ 1, 1, 0 },
 				{ 0, 0, 0 } };
 		
-		int[][] field2 = { { 0, 0, 0 },
+		int[][] grid2 = { { 0, 0, 0 },
 				{ 0, 1, 1 },
 				{ 0, 1, 1 } };
 		
-		int[][] expected1 = field1;
-		int[][] expected2 = field2;
+		int[][] expected1 = grid1;
+		int[][] expected2 = grid2;
 		
-		assertArrayEquals(expected1, GameOfLife.life(field1));
-		assertArrayEquals(expected2, GameOfLife.life(field2));
+		assertArrayEquals(expected1, GameOfLife.play(grid1));
+		assertArrayEquals(expected2, GameOfLife.play(grid2));
 	}
 	
 	@Test
 	public void tubPatternRemainsTheSame() {
-		int[][] field = { { 0, 1, 0 },
+		int[][] grid = { { 0, 1, 0 },
 				{ 1, 0, 1 },
 				{ 0, 1, 0 } };
 		
-		int[][] expected = field;
+		int[][] expected = grid;
 		
-		assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.play(grid));
 	}
 	
 	@Test
 	public void horizontalLineOfThreeCellsRotates() {
-		int[][] field = { { 0, 0, 0 },
+		int[][] grid = { { 0, 0, 0 },
 				{ 1, 1, 1 },
 				{ 0, 0, 0 } };
 		
@@ -118,12 +125,12 @@ public class GameOfLifeTest {
 				{ 0, 1, 0 },
 				{ 0, 1, 0 } };
 		
-		assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.play(grid));
 	}
 	
 	@Test
 	public void verticalLineOfThreeCellsRotates() {
-		int[][] field = { { 0, 1, 0 },
+		int[][] grid = { { 0, 1, 0 },
 				{ 0, 1, 0 },
 				{ 0, 1, 0 } };
 		
@@ -131,26 +138,26 @@ public class GameOfLifeTest {
 				{ 1, 1, 1 },
 				{ 0, 0, 0 } };
 		
-		assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.play(grid));
 	}
 	
 	@Test
 	public void largerGridWorksWithBlockPattern() {
-		int[][] field = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+		int[][] grid = { { 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 1, 1, 0, 0, 0 },
 				{ 0, 0, 0, 1, 1, 0, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
 		
-		int[][] expected = field;
+		int[][] expected = grid;
 		
-		assertArrayEquals(expected, GameOfLife.life(field));
+		assertArrayEquals(expected, GameOfLife.play(grid));
 	}
 	
 	@Test
 	public void beaconOscillatesPeriod2() {
-		int[][] field = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+		int[][] grid = { { 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 1, 1, 0, 0, 0, 0 },
 				{ 0, 0, 1, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 0, 0, 1, 0, 0 },
@@ -164,15 +171,15 @@ public class GameOfLifeTest {
 				{ 0, 0, 0, 0, 1, 1, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0 },};
 		
-		int[][] gen2 = field;
+		int[][] gen2 = grid;
 		
-		assertArrayEquals(gen1, GameOfLife.life(field));
-		assertArrayEquals(gen2, GameOfLife.life(gen1));
+		assertArrayEquals(gen1, GameOfLife.play(grid));
+		assertArrayEquals(gen2, GameOfLife.play(gen1));
 	}
 	
 	@Test
 	public void gliderGlides() {
-		int[][] field = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+		int[][] grid = { { 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 1, 0, 0, 0, 0 },
 				{ 0, 0, 0, 0, 1, 0, 0, 0 },
 				{ 0, 0, 1, 1, 1, 0, 0, 0 },
@@ -207,19 +214,19 @@ public class GameOfLifeTest {
 				{ 0, 0, 0, 1, 1, 1, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
 		
-		assertArrayEquals(gen1, GameOfLife.life(field));
-		assertArrayEquals(gen2, GameOfLife.life(gen1));
-		assertArrayEquals(gen3, GameOfLife.life(gen2));
-		assertArrayEquals(gen4, GameOfLife.life(gen3));
+		assertArrayEquals(gen1, GameOfLife.play(grid));
+		assertArrayEquals(gen2, GameOfLife.play(gen1));
+		assertArrayEquals(gen3, GameOfLife.play(gen2));
+		assertArrayEquals(gen4, GameOfLife.play(gen3));
 	}
 	
 	@Test
 	public void printsNextGenFromInputBlockPattern() {
-		int[][] field = { { 1, 1, 0 },
-				{ 1, 1, 0 },
+		int[][] grid = { { 1, 1, 0 },
+				{ 1, 1, 0 }, 
 				{ 0, 0, 0 } };
 		
-		String expected = "\nYou have created this field:\n\n" +
+		String expected = "\nYou have created this grid:\n\n" +
 							"110\n" +
 							"110\n" +
 							"000\n\n" +
@@ -228,21 +235,21 @@ public class GameOfLifeTest {
 							"110\n" +
 							"000\n";
 		
-		GameOfLife.printNextGenFromInput(field);
+		GameOfLifeCLI.printNextGenFromInput(grid);
 		
 		assertEquals(expected, output.toString());
 	}
 	
 	@Test
 	public void printsNextGenFromInputBeacon() {
-		int[][] field = { { 0, 0, 0, 0, 0, 0, 0, 0 },
+		int[][] grid = { { 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 1, 1, 0, 0, 0, 0 },
 				{ 0, 0, 1, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 0, 0, 1, 0, 0 },
 				{ 0, 0, 0, 0, 1, 1, 0, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0 } };
 		
-		String expected = "\nYou have created this field:\n\n" +
+		String expected = "\nYou have created this grid:\n\n" +
 							"00000000\n" +
 							"00110000\n" +
 							"00100000\n" +
@@ -257,21 +264,21 @@ public class GameOfLifeTest {
 							"00001100\n" +
 							"00000000\n";
 		
-		GameOfLife.printNextGenFromInput(field);
+		GameOfLifeCLI.printNextGenFromInput(grid);
 		
 		assertEquals(expected, output.toString());
 	}
 	
 	@Test
 	public void printsNextGenFromInputExample() {
-		int[][] field = { { 0, 0, 0, 0, 0, 0, 1, 0 },
+		int[][] grid = { { 0, 0, 0, 0, 0, 0, 1, 0 },
 				{ 1, 1, 1, 0, 0, 0, 1, 0 },
 				{ 0, 0, 0, 0, 0, 0, 1, 0 },
 				{ 0, 0, 0, 0, 0, 0, 0, 0 },
 				{ 0, 0, 0, 1, 1, 0, 0, 0 },
 				{ 0, 0, 0, 1, 1, 0, 0, 0 } };
 		
-		String expected = "\nYou have created this field:\n\n" +
+		String expected = "\nYou have created this grid:\n\n" +
 							"00000010\n" +
 							"11100010\n" +
 							"00000010\n" +
@@ -286,7 +293,7 @@ public class GameOfLifeTest {
 							"00011000\n" +
 							"00011000\n";
 		
-		GameOfLife.printNextGenFromInput(field);
+		GameOfLifeCLI.printNextGenFromInput(grid);
 		
 		assertEquals(expected, output.toString());
 	}
