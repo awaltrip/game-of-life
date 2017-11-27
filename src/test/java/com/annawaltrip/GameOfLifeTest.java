@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -257,6 +256,35 @@ public class GameOfLifeTest {
 							"00001100\n" +
 							"00001100\n" +
 							"00000000\n";
+		
+		GameOfLife.printNextGenFromInput(field);
+		
+		assertEquals(expected, output.toString());
+	}
+	
+	@Test
+	public void printsNextGenFromInputExample() {
+		int[][] field = { { 0, 0, 0, 0, 0, 0, 1, 0 },
+				{ 1, 1, 1, 0, 0, 0, 1, 0 },
+				{ 0, 0, 0, 0, 0, 0, 1, 0 },
+				{ 0, 0, 0, 0, 0, 0, 0, 0 },
+				{ 0, 0, 0, 1, 1, 0, 0, 0 },
+				{ 0, 0, 0, 1, 1, 0, 0, 0 } };
+		
+		String expected = "\nYou have created this field:\n\n" +
+							"00000010\n" +
+							"11100010\n" +
+							"00000010\n" +
+							"00000000\n" +
+							"00011000\n" +
+							"00011000\n\n" +
+							"The Next Generation:\n\n" +
+							"01000000\n" +
+							"01000111\n" +
+							"01000000\n" +
+							"00000000\n" +
+							"00011000\n" +
+							"00011000\n";
 		
 		GameOfLife.printNextGenFromInput(field);
 		
